@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anyone here have flu?</title>
+<meta name="description" content="The odds that someone in a room of N people in California is contagious with flu this week, from CDC surveillance data. Guess first.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://matmat202.github.io/anyone-here-have-flu/">
+<meta property="og:title" content="Anyone here have flu?">
+<meta property="og:description" content="The odds that someone in a room of N people in California is contagious with flu this week, from CDC data. Guess first.">
+<meta property="og:image" content="https://matmat202.github.io/anyone-here-have-flu/icons/card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<style>
+:root{color-scheme:light dark}
+body{font:16px/1.45 system-ui,sans-serif;max-width:34rem;margin:0 auto;padding:1rem;color:#222;background:#fff}
+h1{font-size:1.5rem;margin:.2rem 0} .sub{color:#666;margin:0 0 1rem}
+label{font-weight:600} input[type=number]{font:inherit;width:6rem;padding:.3rem}
+input[type=range]{width:100%} .rooms button{font:inherit;font-size:.85rem;margin:.15rem;padding:.3rem .55rem;border:1px solid #bbb;border-radius:1rem;background:#f6f6f6}
+.card{border:1px solid #ddd;border-radius:.6rem;padding:1rem;margin:1rem 0}
+.big{font-size:2.6rem;font-weight:700;color:#c62828;line-height:1.1} .range{color:#555}
+#reveal[hidden],#answer[hidden]{display:none} #go{font:inherit;padding:.45rem 1rem;margin-top:.5rem}
+.row{display:grid;grid-template-columns:4.2rem 1fr 3.4rem;gap:.4rem;align-items:center;font-size:.85rem}
+.row.now{font-weight:700} .track{position:relative;height:.9rem;background:#f2f2f2}
+.track i{position:absolute;left:0;top:0;bottom:0} .peak{background:#e0e0e0} .wk{background:#9e9e9e}
+.now .wk{background:#c62828} .v{text-align:right} small,.note{color:#666;font-size:.8rem}
+@media (prefers-color-scheme:dark){body{background:#121212;color:#ddd}.card{border-color:#333}
+.track{background:#222}.peak{background:#3a3a3a}.rooms button{background:#222;color:#ddd;border-color:#444}
+.sub,.note,small{color:#a8a8a8}.range{color:#b4b4b4}a{color:#8ab4f8}a:visited{color:#c58af9}}
+</style></head><body>
+<h1>Anyone here have flu?</h1>
+<p class="sub">California, week of Oct 18–24 (latest CDC data). Make a guess first.</p>
+<div class="card">
+<label for="n">People in the room</label> <input id="n" type="number" min="1" max="100000" value="300">
+<div class="rooms"><button type="button" data-n="6">dinner table · 6</button><button type="button" data-n="20">section · 20</button><button type="button" data-n="40">seminar · 40</button><button type="button" data-n="120">dorm · 120</button><button type="button" data-n="300">big lecture · 300</button><button type="button" data-n="1700">Memorial Auditorium · 1700</button></div>
+<p><label for="g">Your gut: chance that at least one of them has flu and is contagious</label><br>
+<input id="g" type="range" min="0" max="100" value="20"> <b id="gv">20%</b></p>
+<button id="go" type="button">Show the estimate</button>
+<div id="answer" hidden>
+<div class="big" id="est"></div>
+<div class="range" id="rng"></div>
+<p id="cmp"></p>
+</div></div>
+<div class="card">
+<b>About 0.4% of Californians are contagious with flu on a given day in the week of Oct 18–24</b>
+(range 0.3%–0.7%), or about 1 in 269.
+That is already higher than the worst week of 2016-17, 2018-19, 2021-22.
+<p class="note">Red/grey: the same week of each season. Light bar: that season's worst week.</p>
+<div class="row"><span class="s">2016-17</span><span class="track"><i class="peak" style="width:19.2%"></i><i class="wk" style="width:0.6%"></i></span><span class="v">0.01%</span></div>
+<div class="row"><span class="s">2017-18</span><span class="track"><i class="peak" style="width:100.0%"></i><i class="wk" style="width:1.4%"></i></span><span class="v">0.02%</span></div>
+<div class="row"><span class="s">2018-19</span><span class="track"><i class="peak" style="width:24.3%"></i><i class="wk" style="width:0.8%"></i></span><span class="v">0.01%</span></div>
+<div class="row"><span class="s">2019-20</span><span class="track"><i class="peak" style="width:58.8%"></i><i class="wk" style="width:1.3%"></i></span><span class="v">0.02%</span></div>
+<div class="row"><span class="s">2020-21</span><span class="track"><i class="peak" style="width:0.4%"></i><i class="wk" style="width:0.6%"></i></span><span class="v">0.00%</span></div>
+<div class="row"><span class="s">2021-22</span><span class="track"><i class="peak" style="width:13.5%"></i><i class="wk" style="width:0.6%"></i></span><span class="v">0.00%</span></div>
+<div class="row"><span class="s">2022-23</span><span class="track"><i class="peak" style="width:74.5%"></i><i class="wk" style="width:5.5%"></i></span><span class="v">0.08%</span></div>
+<div class="row"><span class="s">2023-24</span><span class="track"><i class="peak" style="width:50.7%"></i><i class="wk" style="width:2.1%"></i></span><span class="v">0.03%</span></div>
+<div class="row"><span class="s">2024-25</span><span class="track"><i class="peak" style="width:74.7%"></i><i class="wk" style="width:1.4%"></i></span><span class="v">0.02%</span></div>
+<div class="row"><span class="s">2025-26</span><span class="track"><i class="peak" style="width:34.9%"></i><i class="wk" style="width:0.8%"></i></span><span class="v">0.01%</span></div>
+<div class="row now"><span class="s">2026-27</span><span class="track"><i class="wk" style="width:24.8%"></i></span><span class="v">0.4%</span></div>
+</div>
+<p class="note"><b>How this is worked out.</b> Each week CDC reports what share of California doctor visits are
+for flu-like illness and what share of flu tests come back positive. Their product tracks flu
+infections, up to a scale factor. That factor comes from matching each past season to CDC's
+estimate of how many Americans got sick with flu that season (six seasons; it varies 2.6x, so
+the range uses the lowest and highest). Someone is counted as contagious for 5 days. The odds
+for a room then assume its people are a random draw from California: a dorm or a class where flu is
+already going round will be higher than this, and a room of people staying home when sick will be lower.
+Data: CDC FluView via <a href="https://cmu-delphi.github.io/delphi-epidata/">Delphi Epidata</a>; US illness totals from
+CDC's flu burden estimates. Built 2026-11-04.</p>
+<script>
+const P={"lo": 0.0027386577586576903, "mid": 0.0037230187606335534, "hi": 0.007049468006140224};
+const n=document.getElementById('n'),g=document.getElementById('g'),gv=document.getElementById('gv'),ans=document.getElementById('answer');
+const f=x=>x>=.995?'over 99%':x<.01?'under 1%':Math.round(x*100)+'%';
+const odds=(p,k)=>1-Math.pow(1-p,k);
+function show(){const k=Math.max(1,Math.min(100000,parseInt(n.value)||1));
+ const m=odds(P.mid,k);document.getElementById('est').textContent=f(m);
+ document.getElementById('rng').textContent='range '+f(odds(P.lo,k))+' to '+f(odds(P.hi,k))+' for '+k.toLocaleString()+' people';
+ const d=Math.round(m*100)-parseInt(g.value);
+ document.getElementById('cmp').textContent=Math.abs(d)<=10?'Your gut was close.':
+  (d>0?'Higher than your gut, by '+d+' points.':'Lower than your gut, by '+(-d)+' points.');}
+g.oninput=()=>{gv.textContent=g.value+'%';if(!ans.hidden)show();};
+n.oninput=()=>{if(!ans.hidden)show();};
+document.querySelectorAll('.rooms button').forEach(b=>b.onclick=()=>{n.value=b.dataset.n;if(!ans.hidden)show();});
+document.getElementById('go').onclick=()=>{ans.hidden=false;show();};
+</script></body></html>
