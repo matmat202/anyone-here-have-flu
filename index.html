@@ -87,7 +87,10 @@ function render(){const s=wkStart(D.latest_week),e=new Date(s.getTime()+6*864e5)
  if(!ans.hidden)show();}
 // The page fetches CDC FluView itself (Delphi allows any origin), so it is never older than
 // CDC's latest week; the published numbers are the fallback when that fails.
-async function live(){const S=+D.season.slice(0,4),q='/?regions=ca&epiweeks='+S+'40-'+(S+1)+'39';
+// Delphi's v3 API is retired: a range lying wholly after 2026-09-22 answers result -3 with no
+// rows, so the range starts at week 30 (July), which still returns every later week. Summer
+// weeks are older than the published week, so they never win L.
+async function live(){const S=+D.season.slice(0,4),q='/?regions=ca&epiweeks='+S+'30-'+(S+1)+'39';
  const [a,b]=await Promise.all(['fluview','fluview_clinical'].map(ep=>
   fetch('https://api.delphi.cmu.edu/epidata/'+ep+q).then(r=>{if(!r.ok)throw new Error(ep+' '+r.status);return r.json();})));
  if(a.result!==1||b.result!==1)throw new Error('no rows');
