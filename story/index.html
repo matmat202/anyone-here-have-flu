@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>December, in October · California's flu season, week by week since 2016</title>
+<meta name="description" content="A scrolling story from Anyone here have flu?: in late October, about one in five flu tests in California's clinical labs came back positive, more than three times the same week of any season since 2016-17, and a level half of those seasons never reached all winter.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="plot" aria-hidden="true"></div>
+<p id="err" role="alert"></p>
+<main>
+
+<section class="step" data-step="now"><div>
+  <p class="kicker">Anyone here have flu? · a story</p>
+  <h1>December, in October</h1>
+  <p>Every week, California's clinical labs tell CDC how many flu tests they ran and how many
+  came back positive. In the week of <b data-fact="week"></b>, they ran <b data-fact="tests"></b>,
+  and <b data-fact="now"></b> were positive.</p>
+  <p>Here is the <b data-fact="season"></b> season so far, <b data-fact="cur_weeks"></b> weeks
+  of it, one dot a week. Is that a lot?</p>
+  <p class="small">Scroll ↓</p>
+</div></section>
+
+<section class="step" data-step="week"><div>
+  <p class="kicker">Chapter 1 · The same week</p>
+  <h2>More than three times any other year</h2>
+  <p>The same week in each of the <b data-fact="week_n"></b> seasons since
+  <b data-fact="first_season"></b>, in blue. The highest was <b data-fact="week_best"></b>,
+  in <b data-fact="week_best_s"></b>. This year is <b data-fact="times"></b> times that.</p>
+  <p>It is not a handful of tests: that week's <b data-fact="tests"></b> is more than in
+  <b data-fact="fewer_tests"></b> of those <b data-fact="week_n"></b> years.</p>
+  <p class="small"><span class="k cur">this season</span> <span class="k past">past seasons</span></p>
+</div></section>
+
+<section class="step" data-step="autumn"><div>
+  <p class="kicker">Chapter 2 · How early</p>
+  <h2>A level other years reach in December</h2>
+  <p>The line is this week's <b data-fact="now"></b>. Of the past seasons, only
+  <b data-fact="crossed"></b> had reached it by the end of December. The blue dots mark the week each first did.</p>
+  <p>The earliest was <b data-fact="earliest"></b>: <b data-fact="days_ahead"></b> days later
+  in its season than this year. <b data-fact="cross_in:Dec"></b> of the others got there in December.</p>
+</div></section>
+
+<section class="step" data-step="year"><div>
+  <p class="kicker">Chapter 3 · Whole winters</p>
+  <h2>Half of them never got this high</h2>
+  <p>Every week of every season, October to September. <b data-fact="below_peak"></b> of the
+  <b data-fact="past"></b> past seasons, in blue, <span class="w">never got this high</span>,
+  at any point all year. 2023-24 came closest, peaking at <b data-fact="peak:2023-24"></b>.
+  The COVID winter of 2020-21 peaked at <b data-fact="peak:2020-21"></b>.</p>
+  <p>An early start does not say how big a season gets. 2022-23, the last early one, peaked
+  at <b data-fact="peak:2022-23"></b>; 2017-18, which started later, reached
+  <b data-fact="peak:2017-18"></b>.</p>
+</div></section>
+
+<section class="step" data-step="control"><div>
+  <p class="kicker">Chapter 4 · Could it be the data?</p>
+  <h2>Two ways it could be wrong</h2>
+  <p><b>Early numbers get revised.</b> This season's weeks are first reports; past seasons'
+  are final. Each bar runs from a week's first report to its final value. Over
+  <b data-fact="rev_n"></b> October and November weeks, the biggest revision was
+  <b data-fact="rev_max"></b> points. Take that off this week and it is still
+  <b data-fact="floor"></b> times the old record.</p>
+  <p><b>Someone sets a record every year.</b> Compare each past season with the best of the
+  others, week by week through November: in <b data-fact="loo_n"></b> tries, the biggest margin
+  was <b data-fact="loo_max"></b> times (<b data-fact="loo_max_s"></b>, in blue).
+  This season beats it in <span class="w">every one of its weeks</span>, by at least
+  <b data-fact="loo_cur_min"></b> times.</p>
+</div></section>
+
+<section class="step" data-step="now"><div>
+  <p class="kicker">Coda · In a room</p>
+  <h2>What it means for you</h2>
+  <p>Test positivity is not the share of people who are sick: it counts only people sick enough
+  to get tested. Turning it into "how many in a room of 300" takes a model, with an honest range.</p>
+  <p><a href="../">Anyone here have flu?</a> does that, from this week's numbers, for a dinner
+  table, a section, a lecture hall.</p>
+  <p class="small">Data: CDC FluView, clinical laboratories, California, via Delphi Epidata
+  (<code>fluview_clinical</code>); first reports are Delphi's <code>lag=1</code> issue of each
+  week. Weeks are MMWR weeks, drawn at their middle; "the same week" is the same MMWR week
+  number. The build and its checks are in the
+  <a href="https://github.com/matmat202/anyone-here-have-flu">repository</a>.</p>
+</div></section>
+
+</main>
+<script type="module" src="story.js"></script>
+</body>
+</html>
