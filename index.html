@@ -42,6 +42,7 @@ input[type=range]{width:100%} .rooms button{font:inherit;font-size:.85rem;margin
 <div id="answer" hidden>
 <div class="big" id="est"></div>
 <div class="range" id="rng"></div>
+<p id="cnt"></p>
 <p id="cmp"></p>
 <p id="now" hidden></p>
 </div></div>
@@ -72,6 +73,8 @@ const n=$('n'),g=$('g'),gv=$('gv'),ans=$('answer');
 const f=x=>x>=.995?'over 99%':x<.01?'under 1%':Math.round(x*100)+'%';
 const pct=x=>x>=.1?Math.round(x*100)+'%':x>=.001?(x*100).toFixed(1)+'%':(x*100).toFixed(2)+'%';
 const odds=(p,k)=>1-Math.pow(1-p,k);
+// Expected number contagious, k*p: still moves where the odds have saturated at 'over 99%'.
+const cn=x=>x>=9.95?Math.round(x).toLocaleString('en-US'):x>=.995?x.toFixed(1):x>=.00995?x.toFixed(2):x.toPrecision(1);
 const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 // MMWR week: starts Sunday; week 1 is the week holding Jan 4. Same rule as model.epiweek_start.
 function wkStart(ew){const y=Math.floor(ew/100),dow=new Date(Date.UTC(y,0,1)).getUTCDay();
@@ -172,7 +175,8 @@ async function live(){const S=+D.season.slice(0,4);
  render();return L;}
 function show(){const k=Math.max(1,Math.min(100000,parseInt(n.value)||1));
  const m=odds(P.mid,k);document.getElementById('est').textContent=f(m);
- document.getElementById('rng').textContent='range '+f(odds(P.lo,k))+' to '+f(odds(P.hi,k))+' for '+k.toLocaleString()+' people';
+ document.getElementById('rng').textContent='range '+f(odds(P.lo,k))+' to '+f(odds(P.hi,k))+' for '+k.toLocaleString()+(k===1?' person':' people');
+ $('cnt').textContent='Expected number contagious in the room: '+cn(P.mid*k)+' ('+cn(P.lo*k)+' to '+cn(P.hi*k)+').';
  const d=Math.round(m*100)-parseInt(g.value);
  const c=nowcast(),nw=$('now');nw.hidden=!c;
  if(c)nw.textContent='That is CDC’s latest week. By this week ('+c.wk+') it is probably '+(c.m>=1.1?'higher':c.m<=1/1.1?'lower':'about the same')+
